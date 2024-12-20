@@ -16,3 +16,18 @@
 5. - Comparar el movimiento que la jugadora ha seleccionado con el movimiento que ha generado la
 computadora y pintar las pistas correspondientes en la pantalla.
 */
+
+const selectPlay = document.querySelector('.js-slect-play');
+const playBtn = document.querySelector('.js-btn');
+const Result = document.querySelector('.js-result');
+const userScore = document.querySelector('.js-score-user');
+const computerScore = document.querySelector('.js-score-computer');
+
+
+
+function handleClick (ev){
+    ev.preventDefault();
+
+}
+
+playBtn.addEventListener('click', handleClick);
