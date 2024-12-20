@@ -28,6 +28,7 @@ let userPlay = '';
 let gameResult = '';
 let playerScore = userScore.innerHTML;
 let compScore = computerScore.innerHTML;
+let gameplayed = 0;
 
 function getRandomNumber(max) {
     return Math.ceil(Math.random() * max);
@@ -66,7 +67,7 @@ computer play : tijera ------user play:  piedra = user wins
 
 function playTheGame () {
     let computerPlay = computerSelection();
-
+    
     if (computerPlay === userPlay){
         gameResult = 'empate';
         result.innerHTML = 'Empate';
@@ -78,7 +79,12 @@ function playTheGame () {
         result.innerHTML = '¡Has ganado!';
     }
 
+    gameplayed ++;
     console.log(gameResult);
+    console.log(`game played: ${gameplayed}`);
+    return gameplayed;
+
+    
 
 }
 
@@ -98,6 +104,10 @@ function scoreUpdate (player, computer) {
 
 }
 
+function resetGame () {
+
+}
+
 
 function handleClick (ev){
     ev.preventDefault();
@@ -105,6 +115,16 @@ function handleClick (ev){
     scoreUpdate(userScore, computerScore);
     userScore.innerHTML = playerScore;
     computerScore.innerHTML = compScore;
+    if (gameplayed === 10) {
+        if (playerScore > compScore) {
+            result.innerHTML ='Has ganado la partida'
+        } else if (playerScore < compScore) {
+            result.innerHTML ='Has perdido la partida'
+        } else {
+            result.innerHTML ='Has epatado la partida'
+        }
+        resetGame();
+    } 
     
     
     
