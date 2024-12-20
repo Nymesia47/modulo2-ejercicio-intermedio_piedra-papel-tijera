@@ -11,6 +11,7 @@
 /*
 1. - Crear el html (main, h1, h2,  form, input selector(3 opciones), boton jugar, p(resultado), )
 2. - Crear variables - selecionar los elementos que interactuan con el programa
+   - escuchar evento click
 3. - Generar un número aleatorio entre 1 y 9
 4. - Generar un movimiento aleatorio
 5. - Comparar el movimiento que la jugadora ha seleccionado con el movimiento que ha generado la
@@ -23,11 +24,24 @@ const Result = document.querySelector('.js-result');
 const userScore = document.querySelector('.js-score-user');
 const computerScore = document.querySelector('.js-score-computer');
 
+function getRandomNumber(max) {
+    return Math.ceil(Math.random() * max);
+}   
 
 
 function handleClick (ev){
     ev.preventDefault();
-
+    let computerPlay = '';
+    let randomNum = getRandomNumber(9);
+    console.log(randomNum);
+    if (randomNum <= 3) {
+        computerPlay = 'piedra'
+    } else if (randomNum >= 7) {
+        computerPlay = 'papel'
+    } else {
+        computerPlay = 'tijera'
+    };
+    console.log(computerPlay);
 }
 
 playBtn.addEventListener('click', handleClick);
