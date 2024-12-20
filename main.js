@@ -20,7 +20,7 @@ computadora y pintar las pistas correspondientes en la pantalla.
 
 const selectPlay = document.querySelector('.js-slect-play');
 const playBtn = document.querySelector('.js-btn');
-const Result = document.querySelector('.js-result');
+const result = document.querySelector('.js-result');
 const userScore = document.querySelector('.js-score-user');
 const computerScore = document.querySelector('.js-score-computer');
 let computerPlay = '';
@@ -51,16 +51,30 @@ function handleInput (ev) {
 
 selectPlay.addEventListener('input', handleInput);
 
+/*
+computer play : piedra -----user play : tijera = cpmputer wins
+computer play : piedra ------user play: papel = user wins
+computer play : papel -----user play : piedra = cpmputer wins
+computer play : papel ------user play: tijera = user wins
+computer play : tijera -----user play : papel = cpmputer wins
+computer play : tijera ------user play:  piedra = user wins
+
+*/
+
 
 function handleClick (ev){
     ev.preventDefault();
     let computerPlay = computerSelection();
 
     if (computerPlay === userPlay){
-        console.log('empate');
+        result.innerHTML = 'Empate';
+    } else if (computerPlay === 'piedra' && userPlay === 'tijera' || computerPlay === 'papel' && userPlay === 'piedra' || computerPlay === 'tijera' && userPlay === 'papel') {
+        result.innerHTML = '¡Has perdido!';
+    } else {
+        result.innerHTML = '¡Has ganado!';
     }
     
-    console.log(computerPlay);
+    console.log(` computer play is: ${computerPlay}`);
 }
 
 playBtn.addEventListener('click', handleClick);
