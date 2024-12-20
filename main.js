@@ -23,17 +23,16 @@ const playBtn = document.querySelector('.js-btn');
 const Result = document.querySelector('.js-result');
 const userScore = document.querySelector('.js-score-user');
 const computerScore = document.querySelector('.js-score-computer');
+let computerPlay = '';
+let userPlay = '';
 
 function getRandomNumber(max) {
     return Math.ceil(Math.random() * max);
 }   
 
-
-function handleClick (ev){
-    ev.preventDefault();
-    let computerPlay = '';
+function computerSelection() {
     let randomNum = getRandomNumber(9);
-    console.log(randomNum);
+
     if (randomNum <= 3) {
         computerPlay = 'piedra'
     } else if (randomNum >= 7) {
@@ -41,6 +40,26 @@ function handleClick (ev){
     } else {
         computerPlay = 'tijera'
     };
+    return computerPlay;
+}
+
+function handleInput (ev) {
+    userPlay = ev.target.value;
+    console.log(`user play is: ${userPlay}`)
+
+}
+
+selectPlay.addEventListener('input', handleInput);
+
+
+function handleClick (ev){
+    ev.preventDefault();
+    let computerPlay = computerSelection();
+
+    if (computerPlay === userPlay){
+        console.log('empate');
+    }
+    
     console.log(computerPlay);
 }
 
