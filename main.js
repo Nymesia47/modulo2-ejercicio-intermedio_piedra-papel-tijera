@@ -21,10 +21,13 @@ computadora y pintar las pistas correspondientes en la pantalla.
 const selectPlay = document.querySelector('.js-slect-play');
 const playBtn = document.querySelector('.js-btn');
 const result = document.querySelector('.js-result');
-const userScore = document.querySelector('.js-score-user');
-const computerScore = document.querySelector('.js-score-computer');
+let userScore = document.querySelector('.js-score-user');
+let computerScore = document.querySelector('.js-score-computer');
 let computerPlay = '';
 let userPlay = '';
+let gameResult = '';
+let playerScore = userScore.innerHTML;
+let compScore = computerScore.innerHTML;
 
 function getRandomNumber(max) {
     return Math.ceil(Math.random() * max);
@@ -40,6 +43,7 @@ function computerSelection() {
     } else {
         computerPlay = 'tijera'
     };
+    console.log(`computer play is: ${computerPlay}`);
     return computerPlay;
 }
 
@@ -58,23 +62,52 @@ computer play : papel -----user play : piedra = cpmputer wins
 computer play : papel ------user play: tijera = user wins
 computer play : tijera -----user play : papel = cpmputer wins
 computer play : tijera ------user play:  piedra = user wins
-
 */
+
+function playTheGame () {
+    let computerPlay = computerSelection();
+
+    if (computerPlay === userPlay){
+        gameResult = 'empate';
+        result.innerHTML = 'Empate';
+    } else if (computerPlay === 'piedra' && userPlay === 'tijera' || computerPlay === 'papel' && userPlay === 'piedra' || computerPlay === 'tijera' && userPlay === 'papel') {
+        gameResult = 'loss';
+        result.innerHTML = '¡Has perdido!';
+    } else {
+        gameResult = 'win';
+        result.innerHTML = '¡Has ganado!';
+    }
+
+    console.log(gameResult);
+
+}
+
+function scoreUpdate (player, computer) {
+    
+
+    if (gameResult === 'win') {
+        playerScore ++;
+        return playerScore;
+        
+    } else if (gameResult === 'loss') {
+        compScore ++;  
+        return compScore;
+    }
+
+    
+
+}
 
 
 function handleClick (ev){
     ev.preventDefault();
-    let computerPlay = computerSelection();
-
-    if (computerPlay === userPlay){
-        result.innerHTML = 'Empate';
-    } else if (computerPlay === 'piedra' && userPlay === 'tijera' || computerPlay === 'papel' && userPlay === 'piedra' || computerPlay === 'tijera' && userPlay === 'papel') {
-        result.innerHTML = '¡Has perdido!';
-    } else {
-        result.innerHTML = '¡Has ganado!';
-    }
+    playTheGame();
+    scoreUpdate(userScore, computerScore);
+    userScore.innerHTML = playerScore;
+    computerScore.innerHTML = compScore;
     
-    console.log(` computer play is: ${computerPlay}`);
+    
+    
 }
 
 playBtn.addEventListener('click', handleClick);
